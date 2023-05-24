@@ -1,0 +1,24 @@
+def run_expert_system():
+    rules = [
+        {"condition": ["fever", "cough"], "outcome": "Common Cold"},
+        {"condition": ["fever", "rash"], "outcome": "Measles"},
+        {"condition": ["headache", "dizziness"], "outcome": "Migraine"},
+        # Add more rules for different diseases and their corresponding symptoms
+    ]
+
+    user_input = input("Enter your symptoms (comma-separated): ")
+    user_symptoms = user_input.split(",")
+
+    matched_diseases = []
+    for rule in rules:
+        if all(symptom in user_symptoms for symptom in rule["condition"]):
+            matched_diseases.append(rule["outcome"])
+
+    if matched_diseases:
+        print("Possible diseases:")
+        for disease in matched_diseases:
+            print("- " + disease)
+    else:
+        print("No matching diseases found.")
+
+run_expert_system()

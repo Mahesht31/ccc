@@ -1,0 +1,33 @@
+# N-queens problem using branch and bound
+
+# Define the board
+board = [[None for _ in range(8)] for _ in range(8)]
+
+# Define the constraints
+def is_valid(row, col):
+  for i in range(row):
+    if board[i][col] is not None:
+      return False
+  for i in range(row):
+    for j in range(col):
+      if board[i][j] is not None and board[i][j] == board[row][col]:
+        return False
+  return True
+
+# Define the branch and bound algorithm
+def branch_and_bound(row):
+  if row == 8:
+    return True
+
+  for col in range(8):
+    if is_valid(row, col):
+      board[row][col] = row
+      if branch_and_bound(row + 1):
+        return True
+      board[row][col] = None
+
+# Solve the problem
+if branch_and_bound(0):
+  print(board)
+else:
+  print("No solution found")
